@@ -11,7 +11,11 @@ class BulletPoint {
   ) {}
 
   static createRoot() {
-    return new BulletPoint('', '', false, 0, null);
+    return new BulletPoint(BulletPoint.generateId(), '', false, 0, null);
+  }
+
+  static generateId() {
+    return crypto.randomUUID();
   }
 
   clone(): BulletPoint {
@@ -21,7 +25,7 @@ class BulletPoint {
       this.expanded,
       this.index,
       this.parentId,
-      this.children.map((child) => child.clone())
+      this.children.length === 0 ? [] : this.children.map((child) => child.clone())
     );
   }
 
